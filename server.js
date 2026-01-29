@@ -6,6 +6,17 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+/* === ROUTE DEMO (ROZWIĄZANIE 2) === */
+app.get("/", (req, res) => {
+  res.send(`
+    <h2>Asystent AI – backend online ✅</h2>
+    <p>Status: <strong>aktywny</strong></p>
+    <p>Endpoint: <code>POST /chat</code></p>
+    <p>Wersja: demo</p>
+  `);
+});
+
+/* === CHAT ENDPOINT === */
 app.post("/chat", async (req, res) => {
   const userMessage = req.body.message;
 
@@ -32,10 +43,13 @@ app.post("/chat", async (req, res) => {
     const data = await response.json();
     res.json({ reply: data.choices[0].message.content });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ reply: "Błąd serwera" });
   }
 });
 
-app.listen(3000, () => {
-  console.log("Server działa");
+/* === LISTEN === */
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log("Server działa na porcie " + PORT);
 });
