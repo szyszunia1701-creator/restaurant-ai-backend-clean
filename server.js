@@ -32,11 +32,31 @@ app.post("/chat", async (req, res) => {
         messages: [
           {
             role: "system",
-            content:
-              "Jesteś inteligentnym asystentem restauracji. To jest wersja demonstracyjna."
+            content: `
+        Jesteś profesjonalnym asystentem restauracji „Grande Pizza”.
+
+        ZASADY:
+        - Odpowiadasz WYŁĄCZNIE na pytania o: menu, godziny otwarcia, lokalizację, rezerwacje.
+        - Odpowiedzi mają być krótkie, konkretne i uprzejme.
+        - Jeśli nie znasz odpowiedzi – napisz, że należy skontaktować się z restauracją.
+        - NIE wymyślaj informacji.
+        - NIE odpowiadaj na pytania niezwiązane z restauracją.
+
+        DANE RESTAURACJI:
+        - Godziny: pn–nd 12:00–22:00
+        - Adres: ul. Przykładowa 12, Warszawa
+        - Telefon: 123 456 789
+        - Rezerwacje: telefonicznie lub na miejscu
+
+        Zawsze pisz po polsku.
+        `
           },
-          { role: "user", content: userMessage }
+          {
+            role: "user",
+            content: userMessage
+          }
         ]
+
       })
     });
 
